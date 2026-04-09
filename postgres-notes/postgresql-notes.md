@@ -91,3 +91,63 @@ CREATE VIEW user_orders AS
 SELECT users.name, orders.amount
 FROM users
 JOIN orders ON users.id = orders.user_id;
+
+⚙️ 11. Stored Functions
+CREATE FUNCTION get_total_orders(uid INT)
+RETURNS INT AS $$
+BEGIN
+RETURN (SELECT COUNT(\*) FROM orders WHERE user_id = uid);
+END;
+
+$$
+LANGUAGE plpgsql;
+🔐 12. Users & Permissions
+🔹 Create User
+CREATE USER admin WITH PASSWORD '1234';
+🔹 Grant Access
+GRANT ALL PRIVILEGES ON DATABASE mydb TO admin;
+📦 13. JSON Support
+CREATE TABLE products (
+  id SERIAL PRIMARY KEY,
+  data JSON
+);
+📊 14. Aggregation Functions
+COUNT()
+SUM()
+AVG()
+MAX()
+MIN()
+SELECT AVG(amount) FROM orders;
+🔁 15. Subqueries
+SELECT name
+FROM users
+WHERE id IN (
+  SELECT user_id FROM orders WHERE amount > 50
+);
+⚡ 16. Performance Optimization
+Use indexes
+Avoid SELECT *
+Use LIMIT
+Normalize data
+Analyze queries:
+EXPLAIN ANALYZE SELECT * FROM users;
+🧱 17. Normalization
+1NF → No repeating groups
+2NF → No partial dependency
+3NF → No transitive dependency
+🧪 18. Backup & Restore
+🔹 Backup
+pg_dump mydb > backup.sql
+🔹 Restore
+psql mydb < backup.sql
+🌐 19. PostgreSQL with Node.js
+const { Pool } = require("pg");
+
+const pool = new Pool({
+  user: "postgres",
+  password: "1234",
+  host: "localhost",
+  port: 5432,
+  database: "mydb",
+});
+$$
