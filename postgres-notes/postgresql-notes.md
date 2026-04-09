@@ -151,3 +151,17 @@ const pool = new Pool({
   database: "mydb",
 });
 $$
+
+🔥 20. Best Practices
+Use clear naming conventions
+Index large tables
+Avoid unnecessary joins
+Secure credentials properly
+Use environment variables
+🎯 Conclusion
+
+PostgreSQL is a robust, scalable, and production-ready database widely used in:
+
+Banking systems
+eCommerce platforms
+Enterprise applications
