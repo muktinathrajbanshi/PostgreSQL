@@ -42,3 +42,52 @@ id SERIAL PRIMARY KEY,
 user_id INT REFERENCES ecommerce.users(id),
 amount DECIMAL(10,2) CHECK (amount > 0)
 );
+
+🔗 6. Relationships
+🔹 One-to-Many
+One user → Many orders
+🔹 Many-to-Many
+CREATE TABLE students_courses (
+student_id INT,
+course_id INT,
+PRIMARY KEY (student_id, course_id)
+);
+🔍 7. Advanced Queries
+🔹 INNER JOIN
+SELECT users.name, orders.amount
+FROM users
+JOIN orders ON users.id = orders.user_id;
+🔹 LEFT JOIN
+SELECT users.name, orders.amount
+FROM users
+LEFT JOIN orders ON users.id = orders.user_id;
+🔹 GROUP BY
+SELECT user_id, SUM(amount)
+FROM orders
+GROUP BY user_id;
+🔹 HAVING
+SELECT user_id, SUM(amount)
+FROM orders
+GROUP BY user_id
+HAVING SUM(amount) > 100;
+⚡ 8. Indexing (Performance)
+🔹 Create Index
+CREATE INDEX idx_users_email ON users(email);
+🔹 Benefits
+Faster data retrieval
+Improves query performance
+🔄 9. Transactions
+🔹 Example
+BEGIN;
+
+INSERT INTO users (name, email)
+VALUES ('Ram', 'ram@gmail.com');
+
+COMMIT;
+🔹 Rollback
+ROLLBACK;
+🧩 10. Views
+CREATE VIEW user_orders AS
+SELECT users.name, orders.amount
+FROM users
+JOIN orders ON users.id = orders.user_id;
